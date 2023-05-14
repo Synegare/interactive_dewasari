@@ -909,7 +909,7 @@ require('config.php');
                 window.activeBarSlideUp = setInterval(function(){
 
                     // Kalau totalchild kurang dari 12
-                    if(totalActiveBarChild <= 12){
+                    if(totalActiveBarChild <= 13){
                         clearInterval(window.activeBarSlideUp);
                         window.activeBarSlideUp = null;
 
@@ -918,7 +918,7 @@ require('config.php');
                     }else{
                         let totalVisibleChild = jQuery("#bar-"+activeBar+" .list-staff-box .team-member-list-1:visible").length;
 
-                        if(totalVisibleChild > 12){
+                        if(totalVisibleChild > 13){
                             // SlideUp
                             jQuery("#bar-"+activeBar+" .list-staff-box .team-member-list-1").eq(indexSlideUp).slideUp();
                             indexSlideUp++;
