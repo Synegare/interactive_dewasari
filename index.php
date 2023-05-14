@@ -908,8 +908,8 @@ require('config.php');
                 indexSlideUp = 0;
                 window.activeBarSlideUp = setInterval(function(){
 
-                    // Kalau totalchild kurang dari 13
-                    if(totalActiveBarChild <= 13){
+                    // Kalau totalchild kurang dari 12
+                    if(totalActiveBarChild <= 12){
                         clearInterval(window.activeBarSlideUp);
                         window.activeBarSlideUp = null;
 
@@ -918,7 +918,7 @@ require('config.php');
                     }else{
                         let totalVisibleChild = jQuery("#bar-"+activeBar+" .list-staff-box .team-member-list-1:visible").length;
 
-                        if(totalVisibleChild > 13){
+                        if(totalVisibleChild > 12){
                             // SlideUp
                             jQuery("#bar-"+activeBar+" .list-staff-box .team-member-list-1").eq(indexSlideUp).slideUp();
                             indexSlideUp++;
