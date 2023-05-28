@@ -13,28 +13,27 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0',
-    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-    'Accept-Language' => 'en-US,en;q=0.5',
-    'Accept-Encoding' => 'gzip, deflate, br',
-    'Referer' => 'https://idm.kemendesa.go.id/login',
-    'Connection' => 'keep-alive',
-    'Upgrade-Insecure-Requests' => '1',
-    'Sec-Fetch-Dest' => 'document',
-    'Sec-Fetch-Mode' => 'navigate',
-    'Sec-Fetch-Site' => 'same-origin',
+    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',
+    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'Accept-Language: en-US,en;q=0.5',
+    'Accept-Encoding: gzip, deflate, br',
+    'Referer: https://idm.kemendesa.go.id/',
+    'Connection: keep-alive',
+    'Upgrade-Insecure-Requests: 1',
+    'Sec-Fetch-Dest: document',
+    'Sec-Fetch-Mode: navigate',
+    'Sec-Fetch-Site: same-origin',
+    'TE: trailers',
 ]);
 
-
 $response = curl_exec($ch);
+
+// print_r($response);
+
 $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 $header = substr($response, 0, $header_size);
 
-
-
-$header = explode('Set-Cookie: idm_session=', $header); // tadinya idm_session
-
-
+$header = explode('set-cookie: idm_session=', $header); // tadinya idm_session
 
 
 if(isset($header[1]) && $header[1] != ''){
@@ -54,6 +53,7 @@ if($idm_session == 'N/A'){
 
    $username = isset($_GET['username']) ? $_GET['username'] : '';
    $pass = isset($_GET['pass']) ? $_GET['pass'] : '';
+   $tahun_idm = isset($_GET['year']) ? $_GET['year'] : Date('Y');
 
    if($username != '' && $pass != ''){
 
@@ -100,8 +100,8 @@ if($idm_session == 'N/A'){
       // Set Resp Status
       $arr['status'] = 'success';
 
-      // Get IDM tahun 2021
-      $url_dash = "https://idm.kemendesa.go.id/admin/content?y=2022";
+      // Get IDM
+      $url_dash = "https://idm.kemendesa.go.id/admin/content?y=".$tahun_idm;
 
       $curl_dash = curl_init($url_dash);
       curl_setopt($curl_dash, CURLOPT_URL, $url_dash);

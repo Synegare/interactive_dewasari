@@ -7,6 +7,24 @@ require('config.php');
 // }
 
 
+// Get Settings
+$getSettings = mysqli_query($con, "SELECT * FROM demil_settings") or die(mysqli_error($con));
+$setting = array();
+while($set = mysqli_fetch_assoc($getSettings)){
+    $setting[$set['setting_key']] = $set['setting_value'];
+}
+
+$setting = (object)$setting;
+
+// Get Profile
+$getProfile = mysqli_query($con, "SELECT * FROM demil_profile") or die(mysqli_error($con));
+$profile = array();
+while($pro = mysqli_fetch_assoc($getProfile)){
+    $profile[$pro['profile_key']] = $pro['profile_value'];
+}
+
+$profile = (object)$profile;
+
 ?>
 <!DOCTYPE html>
 <html lang="id-ID">
@@ -691,7 +709,7 @@ require('config.php');
                         let getIDM = function(){
                             jQuery.ajax({
                                 type: "GET",
-                                url: 'getidm.php?username=3207032002&pass=idm-kemendesa_2023',
+                                url: 'getidm.php?username=<?=$profile->kode_wilayah; ?>&pass=idm-kemendesa_<?=Date('Y'); ?><?php if(isset($setting->infographic_idm_year) AND $setting->infographic_idm_year != ''): echo '&year='.$setting->infographic_idm_year; endif;?>',
                                 cache: true,
                                 beforeSend: function(){
                                     jQuery(".idm-loader").fadeIn();
