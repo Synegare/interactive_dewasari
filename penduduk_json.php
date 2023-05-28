@@ -76,8 +76,8 @@ if($penduduk_diploma['pendidikan_diploma'] != ''){
 	$arr['pendidikan_diploma'] = $penduduk_diploma['pendidikan_diploma'];
 }
 
-// Get Jumlah Penduduk S1 / S2
-$get_penduduk_sarjana = mysqli_query($con, "SELECT COUNT(penduduk_pendidikan) as pendidikan_sarjana FROM `demil_penduduk` where (penduduk_pendidikan = 'Tamat S-1/sederajat' OR penduduk_pendidikan = 'Tamat S-2/sederajat' OR penduduk_pendidikan = 'Diploma IV/Strata I' OR penduduk_pendidikan = 'Strata II')") or die(mysqli_error($con));
+// Get Jumlah Penduduk S1 / S2 / S3
+$get_penduduk_sarjana = mysqli_query($con, "SELECT COUNT(penduduk_pendidikan) as pendidikan_sarjana FROM `demil_penduduk` where (penduduk_pendidikan = 'Tamat S-1/sederajat' OR penduduk_pendidikan = 'Tamat S-2/sederajat' OR penduduk_pendidikan = 'Diploma IV/Strata I' OR penduduk_pendidikan = 'Strata II' OR penduduk_pendidikan = 'Diploma IV/Strata I' OR penduduk_pendidikan = 'Strata III')") or die(mysqli_error($con));
 $penduduk_sarjana = mysqli_fetch_assoc($get_penduduk_sarjana);
 
 if($penduduk_sarjana['pendidikan_sarjana'] != ''){

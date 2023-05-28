@@ -448,7 +448,7 @@ $profile = (object)$profile;
                                     <img src="assets/images/graduation-hat.svg" loading="lazy" alt="" class="penduduk-box-icon" />
                                     <div class="penduduk-box-content">
                                         <div class="penduduk-box-num" id="pendidikan_sarjana">0</div>
-                                        <div class="penduduk-box-title">S1 / S2</div>
+                                        <div class="penduduk-box-title">S1 / S2 / S3</div>
                                     </div>
                                 </div>
                             </div>
