@@ -236,7 +236,7 @@ $profile = (object)$profile;
                         <div class="medium-card" style="overflow: hidden;height: 250px;">
 
                             <div class="stats-card-header">
-                                <img src="assets/images/covid-19.svg" loading="lazy" alt="" class="stats-card-header-icon" />
+                                <img src="assets/images/avatar.svg" loading="lazy" alt="" class="stats-card-header-icon" />
                                 <h3 class="stats-card-header-title">Status Perangkat Desa</h3>
                             </div>
 
@@ -867,7 +867,48 @@ $profile = (object)$profile;
             // Bar staff
             jQuery(document).ready(function(){
                 autoPlayBar();
+                autoPlayStaff();
             });
+
+            function autoPlayStaff(){
+
+                jQuery("#staffBar").fadeIn();
+
+                totalActiveBarChild = jQuery("#staffBar .list-staff-box .team-member-list-1").length;
+
+                indexSlideUp = 0;
+                window.staffBarSlideUp = setInterval(function(){
+
+                    // Kalau totalchild kurang dari 12
+                    if(totalActiveBarChild <= 7){
+                        clearInterval(window.staffBarSlideUp);
+                        window.staffBarSlideUp = null;
+
+                        setTimeout(autoPlayStaff, 10000);
+
+                    }else{
+                        let totalVisibleChild = jQuery("#staffBar .list-staff-box .team-member-list-1:visible").length;
+
+                        if(totalVisibleChild > 7){
+                            // SlideUp
+                            jQuery("#staffBar .list-staff-box .team-member-list-1").eq(indexSlideUp).slideUp();
+                            indexSlideUp++;
+                        }else{
+                            // Reset current bar
+                            jQuery("#staffBar").hide();
+
+                            jQuery("#staffBar .list-staff-box .team-member-list-1:hidden").slideDown();
+
+                            clearInterval(window.staffBarSlideUp);
+                            window.staffBarSlideUp = null;
+
+                            autoPlayStaff();
+
+                        }
+                    }
+                    
+                }, 3000);
+            }
 
             function autoPlayBar(activeBar){
                 if(activeBar == undefined){
