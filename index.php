@@ -819,7 +819,7 @@ $profile = (object)$profile;
                             FROM demil_lkd") or die(mysqli_error($con));
                         while($lkd=mysqli_fetch_assoc($get_all_lkd)):
                             ?>
-                        <div class="staff-bar-box" id="bar-<?=$idx_lkd; ?>" data-title="<?=$lkd['lkd_title']; ?>" style="display: none;">
+                        <div class="staff-bar-box staff-bar-normal" id="bar-<?=$idx_lkd; ?>" data-title="<?=$lkd['lkd_title']; ?>" style="display: none;">
                             
                             <div class="list-staff-box">
                                 <?php
@@ -929,7 +929,7 @@ $profile = (object)$profile;
                 jQuery("#bar-"+activeBar).fadeIn();
 
                 // Jumlah Bar
-                let totalBar = jQuery(".staff-bar-box").length;
+                let totalBar = jQuery(".staff-bar-normal").length;
                 nextBar = activeBar+1;
                 if(nextBar >= totalBar){
                     nextBar = 0;
