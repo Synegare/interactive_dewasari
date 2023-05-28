@@ -233,46 +233,36 @@ $profile = (object)$profile;
                           }
                           </script>
                         </div>
-                        <div class="medium-card">
+                        <div class="medium-card" style="overflow: hidden;height: 250px;">
+
                             <div class="stats-card-header">
                                 <img src="assets/images/covid-19.svg" loading="lazy" alt="" class="stats-card-header-icon" />
-                                <h3 class="stats-card-header-title">Statistik COVID-19 Kabupaten Ciamis</h3>
+                                <h3 class="stats-card-header-title">Status Perangkat Desa</h3>
                             </div>
 
-                            <div class="covid-boxes">
-                            <div class="covid-box">
+                            <div class="staff-bar-box" id="staffBar" data-title="Status Perangkat Desa" style="">
+                            <div class="list-staff-box">
+                                <?php
+                                $get_all_staff = mysqli_query($con, "SELECT * 
+                                    FROM demil_staffs LEFT JOIN demil_jabatan ON demil_staffs.staff_jabatan_id = demil_jabatan.jabatan_id where demil_staffs.staff_username <> 'operator' ORDER BY demil_staffs.staff_id ASC") or die(mysqli_error($con));
+                                while($staff=mysqli_fetch_assoc($get_all_staff)):
+                            ?>
+                                <div class="team-member-list-1" data-staffID="<?=$staff['staff_id']; ?>">
+                                    <div class="team-member-list-1-main">
+                                        <img src="/DesaMilenial-Uploads/<?=isset($staff['staff_avatar']) ? $staff['staff_avatar'] : ''; ?>" loading="lazy" alt="" class="team-member-list-1-avatar" />
+                                        <div class="team-member-list-1-main-detail">
+                                            <h3 class="team-member-list-1-name"><?=isset($staff['staff_name']) ? $staff['staff_name'] : ''; ?></h3>
+                                            <div class="team-member-list-1-jabatan"><?=isset($staff['jabatan_name']) ? $staff['jabatan_name'] : ''; ?></div>
+                                        </div>
+                                    </div>
+                                    <div id="staff-status-<?=$staff['staff_id']; ?>">
+                                        
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                            </div>
+                        </div>
 
-                            <div class="covid-desa-box">
-                            <div class="chart-container covid-desa" style="position: relative;width:130px;height:130px;">
-                            <canvas id="covid-desa"></canvas>
-                            </div>
-                            <div class="covid-desa-legends">
-                                <div class="covid-desa-legend">
-                                    <div class="covid-desa-circle total-kasus"></div>
-                                    <div class="covid-city-stat-box-count" id="total_confirmed_kab">0 kasus</div>
-                                </div>
-                                <div class="covid-desa-legend">
-                                    <div class="covid-desa-circle sembuh"></div>
-                                    <div class="covid-city-stat-box-count" id="total_recovered_kab">0 Sembuh</div>
-                                </div>
-                                <div class="covid-desa-legend">
-                                    <div class="covid-desa-circle"></div>
-                                    <div class="covid-city-stat-box-count" id="total_active_kab">0 Positif Aktif</div>
-                                </div>
-                                <div class="covid-desa-legend">
-                                    <div class="covid-desa-circle meninggal"></div>
-                                    <div class="covid-city-stat-box-count" id="total_death_kab">0 Meninggal dunia</div>
-                                </div>
-                                <div class="covid-desa-legend">
-                                    <div class="covid-desa-circle suspek"></div>
-                                    <div class="covid-city-stat-box-count" id="total_suspect_kab">0 Suspek</div>
-                                </div>
-                            </div>
-                        </div>
-                            </div>
-                            <!-- COVID KAB -->
-                            <!-- End COVID KAB -->
-                        </div>
 
                         </div>
                     </div>
@@ -820,32 +810,11 @@ $profile = (object)$profile;
                             <img src="assets/images/avatar.svg" loading="lazy" alt="" class="stats-card-header-icon" />
                             <h3 class="stats-card-header-title" id="bar-title">-</h3>
                         </div>
-                        <div class="staff-bar-box" id="bar-0"  data-title="Status Perangkat Desa" style="display: none;">
-                            <div class="list-staff-box">
-                                <?php
-                                $get_all_staff = mysqli_query($con, "SELECT * 
-                                    FROM demil_staffs LEFT JOIN demil_jabatan ON demil_staffs.staff_jabatan_id = demil_jabatan.jabatan_id where demil_staffs.staff_username <> 'operator' ORDER BY demil_staffs.staff_id ASC") or die(mysqli_error($con));
-                                while($staff=mysqli_fetch_assoc($get_all_staff)):
-                            ?>
-                                <div class="team-member-list-1" data-staffID="<?=$staff['staff_id']; ?>">
-                                    <div class="team-member-list-1-main">
-                                        <img src="/DesaMilenial-Uploads/<?=isset($staff['staff_avatar']) ? $staff['staff_avatar'] : ''; ?>" loading="lazy" alt="" class="team-member-list-1-avatar" />
-                                        <div class="team-member-list-1-main-detail">
-                                            <h3 class="team-member-list-1-name"><?=isset($staff['staff_name']) ? $staff['staff_name'] : ''; ?></h3>
-                                            <div class="team-member-list-1-jabatan"><?=isset($staff['jabatan_name']) ? $staff['jabatan_name'] : ''; ?></div>
-                                        </div>
-                                    </div>
-                                    <div id="staff-status-<?=$staff['staff_id']; ?>">
-                                        
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
-                            </div>
-                        </div>
+                        
 
                         <?php
                         // Get LKD
-                        $idx_lkd = 1;
+                        $idx_lkd = 0;
                         $get_all_lkd = mysqli_query($con, "SELECT * 
                             FROM demil_lkd") or die(mysqli_error($con));
                         while($lkd=mysqli_fetch_assoc($get_all_lkd)):
