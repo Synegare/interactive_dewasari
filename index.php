@@ -874,28 +874,30 @@ $profile = (object)$profile;
 
                 jQuery("#staffBar").fadeIn();
 
-                totalActiveBarChild = jQuery("#staffBar .list-staff-box .team-member-list-1").length;
+                totalActiveBarChildStaff = jQuery("#staffBar .list-staff-box .team-member-list-1").length;
 
-                indexSlideUp = 0;
+                indexSlideUpStaff = 0;
                 window.staffBarSlideUp = setInterval(function(){
 
                     // Kalau totalchild kurang dari 12
-                    if(totalActiveBarChild <= 7){
+                    if(totalActiveBarChildStaff <= 7){
                         clearInterval(window.staffBarSlideUp);
                         window.staffBarSlideUp = null;
 
                         setTimeout(autoPlayStaff, 10000);
 
                     }else{
-                        let totalVisibleChild = jQuery("#staffBar .list-staff-box .team-member-list-1:visible").length;
+                        let totalVisibleChildStaff = jQuery("#staffBar .list-staff-box .team-member-list-1:visible").length;
 
-                        if(totalVisibleChild > 7){
+                        console.log(totalVisibleChildStaff);
+
+                        if(totalVisibleChildStaff > 7){
                             // SlideUp
-                            jQuery("#staffBar .list-staff-box .team-member-list-1").eq(indexSlideUp).slideUp();
-                            indexSlideUp++;
+                            jQuery("#staffBar .list-staff-box .team-member-list-1").eq(indexSlideUpStaff).slideUp();
+                            indexSlideUpStaff++;
                         }else{
                             // Reset current bar
-                            jQuery("#staffBar").hide();
+                            jQuery("#staffBar").fadeOut();
 
                             jQuery("#staffBar .list-staff-box .team-member-list-1:hidden").slideDown();
 
@@ -908,6 +910,8 @@ $profile = (object)$profile;
                     }
                     
                 }, 3000);
+
+                return false;
             }
 
             function autoPlayBar(activeBar){
